@@ -7,7 +7,8 @@ export default  {
         price:600,
         brand:'MB',
         rating: 4,
-        numReviews:10
+        numReviews:10,
+        countInStock:6
     },
     {
         _id:'2',
@@ -17,7 +18,8 @@ export default  {
         price:700,
         brand:'MB',
         rating: 2,
-        numReviews:22
+        numReviews:22,
+        countInStock:5
     },
     {
         _id:'3',
@@ -27,7 +29,8 @@ export default  {
         price:500,
         brand:'MB',
         rating: 3,
-        numReviews:10
+        numReviews:10,
+        countInStock:0
     },
 ]
 }
