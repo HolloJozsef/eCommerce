@@ -11,7 +11,7 @@ export default  {
     },
     {
         _id:'2',
-        name:"Turbo2",
+        name:"1111111111",
         category:'Engine',
         image:"/images/d1.jpg",
         price:700,
