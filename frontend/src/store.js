@@ -5,9 +5,12 @@ import { cartReducer } from './reducers/cartReducers';
 import Cookie from 'js-cookie'
 import { userRegisterReducer, userSigninReducer } from './reducers/userReducers';
 const cartItems = Cookie.getJSON("cartItems") || [];
-const userInfo = Cookie.getJSON("userInfo") || [];
+const userInfo = Cookie.getJSON("userInfo") || null;
 
-const initialState={cart:{cartItems}, userSignin:{userInfo}};
+const initialState={
+    cart:{cartItems}, 
+    userSignin:{userInfo}
+};
 const reducer= combineReducers({
     productList: productListReducer,
     productDetails: productDetailsReducer,
