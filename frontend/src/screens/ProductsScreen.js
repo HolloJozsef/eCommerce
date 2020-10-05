@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { listProducts, saveProduct } from '../actions/productActions';
+import { deleteProduct, listProducts, saveProduct } from '../actions/productActions';
 function ProductsScreen(props){
     const [modalVisible, setModalVisible] = useState(false);
     const [id,setId]=useState('');
@@ -15,14 +15,19 @@ function ProductsScreen(props){
     const {loading, products, error} = productList;
     const productSave = useSelector(state=>state.productSave);
     const{loading:loadingSave, success:successSave, error:errorSave}=productSave;
+    const productDelete = useSelector(state=>state.productDelete);
+    const{loading:loadingDelete, success:successDelete, error:errorDelete}=productDelete;
     const dispatch = useDispatch();
 
     useEffect(()=>{
+        if(successSave){
+            setModalVisible(false);
+        }
         dispatch(listProducts());
         return()=>{
             //
         };
-    },[])
+    },[successSave,successDelete])
 
     const openModal = (product)=>{
         setModalVisible(true);
@@ -52,23 +57,14 @@ function ProductsScreen(props){
           })
         );
       };
-      const saving = (e)=>{
-        saveProduct({
-            _id: id,
-            name,
-            price,
-            image,
-            brand,
-            category,
-            countInStock,
-            description,
-          })
+      const deleteHandler = (product)=>{
+          dispatch(deleteProduct(product._id));
       }
  
     return <div className = "content content-margined">
         <div className="product-header">
             <h3>Products</h3>
-            <button onClick={()=>openModal({})}> Create Product</button>
+            <button className="button" onClick={()=>openModal({})}> Create Product</button>
         </div>
         {modalVisible &&
         <div className="form">
@@ -171,7 +167,7 @@ function ProductsScreen(props){
     </div>
 }
         <div className = "product-list">
-            <table>
+            <table className="table">
                 <thead>
                     <tr>
                         <th>Id</th>
@@ -192,8 +188,8 @@ function ProductsScreen(props){
                         <td>{product.category}</td>
                         <td>{product.brand}</td>
                         <td>
-                            <button onClick={()=>openModal(product)}>Edit</button>
-                            <button>Delete</button>
+                            <button className="button secondary" onClick={()=>openModal(product)}>Edit</button>
+                            <button  className="button secondary" onClick={()=>deleteHandler(product)}>Delete</button>
                         </td>
                     </tr>)
                     }
