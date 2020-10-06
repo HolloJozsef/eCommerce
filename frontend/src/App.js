@@ -8,6 +8,9 @@ import SigninScreen from './screens/SigninScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import { useSelector } from 'react-redux';
 import ProductsScreen from './screens/ProductsScreen';
+import ShippingScreen from './screens/ShippingScreen';
+import PaymentScreen from './screens/PaymentScreen';
+import PlaceOrderScreen from './screens/PlaceOrderScreen';
 
 function App() {
     const userSignin=useSelector(state=>state.userSignin);
@@ -26,7 +29,7 @@ function App() {
             <button onClick={openMenu}>
                 &#9776;
             </button>
-            <Link to="/">Shopify</Link>
+            <Link to="/">Paraglider4Sale</Link>
         </div> 
         <div className="header-links">
             <a href="cart.html">Cart</a>
@@ -53,6 +56,9 @@ function App() {
     </aside>
         <main className="main">
             <div className="content">
+            <Route path="/shipping" component={ShippingScreen}/>
+            <Route path="/payment" component={PaymentScreen}/>
+            <Route path="/placeorder" component={PlaceOrderScreen}/>
             <Route path="/products" component={ProductsScreen}/>
             <Route path="/register" component={RegisterScreen}/>
               <Route path="/signin" component={SigninScreen}/>
